@@ -20,6 +20,13 @@
         <property name="configFileLocation" value="classpath:/META-INF/user-config.properties"/>
     </bean>
 
+    <!-- 普通 beanDefinition GenericBeanDefinition -->
+    <!-- 合并后 GenericBeanDefinition 变成 RootBeanDefinition，并且覆盖 parent 相关配置-->
+    <!-- primary = true , 增加了一个 address 属性 -->
+    <bean id="superUser" class="com.ausware.thinking.in.spring.ioc.overview.entity.SuperUser" parent="user" primary="true">
+        <property name="address" value="杭州"/>
+    </bean>
+
     <!-- 借助ObjectFactory，实现延时查找 -->
     <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
         <property name="targetBeanName" value="user"/>

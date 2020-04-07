@@ -1,5 +1,7 @@
 package com.ausware.thinking.in.spring.ioc.overview.dependency.lookup;
 
+import com.ausware.thinking.in.spring.ioc.overview.annotation.Super;
+import com.ausware.thinking.in.spring.ioc.overview.entity.SuperUser;
 import com.ausware.thinking.in.spring.ioc.overview.entity.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -26,6 +28,8 @@ public class DependencyLookupDemo {
         lookupByType(beanFactory);
         //借助ObjectFactory，延时查找
         lookupInLazy(beanFactory);
+        //根据指定类型，实时查找
+        lookupCollectionByType(beanFactory);
         //根据注解类型，实时查找
         lookupByAnnotationType(beanFactory);
     }
@@ -59,13 +63,25 @@ public class DependencyLookupDemo {
     }
 
     /**
-     * 方法四：根据注解类型实时查找
+     * 方法四：根据指定类型实时查找
+     * @param beanFactory
+     */
+    private static void lookupCollectionByType(BeanFactory beanFactory) {
+        if (beanFactory instanceof ListableBeanFactory) {
+            ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
+            Map<String, User> users = listableBeanFactory.getBeansOfType(User.class);
+            System.out.println("查找到的所有的 User 集合对象：" + users);
+        }
+    }
+
+    /**
+     * 方法五：根据注解类型实时查找
      * @param beanFactory
      */
     public static void lookupByAnnotationType(BeanFactory beanFactory) {
         if(beanFactory instanceof ListableBeanFactory) {
             ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
-            Map<String, User> users = listableBeanFactory.getBeansOfType(User.class);
+            Map<String, User> users = (Map) listableBeanFactory.getBeansWithAnnotation(Super.class);
             System.out.println("查找所有类型的集合对象：" + users);
         }
     }
