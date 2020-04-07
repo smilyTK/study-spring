@@ -1,7 +1,6 @@
 package com.ausware.thinking.in.spring.ioc.overview.dependency.lookup;
 
 import com.ausware.thinking.in.spring.ioc.overview.annotation.Super;
-import com.ausware.thinking.in.spring.ioc.overview.entity.SuperUser;
 import com.ausware.thinking.in.spring.ioc.overview.entity.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -12,8 +11,7 @@ import java.util.Map;
 
 /**
  * 依赖查找
- *
- * @author
+ * @author tuk
  * @create 2020-04-07 12:39
  **/
 public class DependencyLookupDemo {
