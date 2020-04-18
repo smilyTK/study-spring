@@ -13,10 +13,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
 import javax.inject.Inject;
-import java.lang.annotation.Annotation;
-import java.util.*;
-
-import static org.springframework.context.annotation.AnnotationConfigUtils.AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * 注解驱动的依赖注入处理过程
@@ -33,13 +31,13 @@ public class AnnotationDependencyInjectionResolutionDemo {
     @Autowired  //集合类型依赖查找
     private Map<String, User> users; // user super
 
-    @MyAutowired
+    @MyAutowired  //使用元注解进行扩展
     private Optional<User> userOptional;  // superUser
 
     @Inject  //JSR
-    private User injectionUser;
+    private User injectionUser;  //superUser
 
-    @InjectionUser
+    @InjectionUser  //使用自定义注解
     private User myInjectionUser;
 
 
@@ -53,6 +51,8 @@ public class AnnotationDependencyInjectionResolutionDemo {
 //        return beanPostProcessor;
 //    }
 
+    //为了让@bean优先加载，需要把方法提升为 static
+    //将使用两个 AutowiredAnnotationBeanPostProcessor，优先加载 static 的，再进行加载系统默认的
     @Bean
     @Order(Ordered.LOWEST_PRECEDENCE - 3)
     public static AutowiredAnnotationBeanPostProcessor beanPostProcessor() {
