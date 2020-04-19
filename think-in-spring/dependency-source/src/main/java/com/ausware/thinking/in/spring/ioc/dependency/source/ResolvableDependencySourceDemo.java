@@ -31,8 +31,9 @@ public class ResolvableDependencySourceDemo {
         //注册 Configuration class
         applicationContext.register(ResolvableDependencySourceDemo.class);
 
-
         //注册外部游离Bean
+        //非spring容器管理对象，作为依赖注入的依赖源
+        // ConfigurableListableBeanFactory#registerResolvableDependency
         applicationContext.addBeanFactoryPostProcessor(beanFactoryPostProcessor -> {
             beanFactoryPostProcessor.registerResolvableDependency(String.class, "hello word");
         });
