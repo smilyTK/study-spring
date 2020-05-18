@@ -4,6 +4,8 @@ import com.ausware.thinking.in.spring.ioc.overview.enums.City;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.core.io.Resource;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Arrays;
 import java.util.List;
 
@@ -107,4 +109,15 @@ public class User implements BeanNameAware {
     public void setBeanName(String beanName) {
         this.beanName = beanName;
     }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("User bean ["+ beanName + "] 初始化中");
+    }
+
+    @PreDestroy
+    public void destory() {
+        System.out.println("User bean ["+ beanName + "] 销毁中");
+    }
+
 }

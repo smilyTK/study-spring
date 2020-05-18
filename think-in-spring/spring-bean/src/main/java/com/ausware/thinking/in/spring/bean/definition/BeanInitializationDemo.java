@@ -2,7 +2,6 @@ package com.ausware.thinking.in.spring.bean.definition;
 
 import com.ausware.thinking.in.spring.bean.factory.DefaultUserFactory;
 import com.ausware.thinking.in.spring.bean.factory.UserFactory;
-import com.ausware.thinking.in.spring.ioc.overview.entity.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,5 +42,4 @@ public class BeanInitializationDemo {
     public UserFactory userFactory() {
         return new DefaultUserFactory();
     }
-
 }
